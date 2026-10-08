@@ -1,0 +1,5 @@
+{
+  "name": "modern-wiremock-best-practices",
+  "description": "Professional modern WireMock best practices covering declarative stubs architecture (mappings/ and __files/), response payload separation, Handlebars dynamic templating, stateful scenarios, fault injection, container orchestration, and mandatory living README.md documentation discipline.",
+  "version": "1.0.0"
+}
