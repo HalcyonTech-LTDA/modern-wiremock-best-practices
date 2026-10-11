@@ -1,0 +1,14 @@
+{
+  "name": "modern-wiremock-best-practices",
+  "description": "Professional modern WireMock best practices covering declarative stubs architecture (mappings/ and __files/), response payload separation, Handlebars dynamic templating, stateful scenarios, fault injection, container orchestration, and mandatory living README.md documentation discipline.",
+  "author": {
+    "name": "Halcyon Tech",
+    "url": "https://github.com/HalcyonTech-LTDA"
+  },
+  "homepage": "https://github.com/HalcyonTech-LTDA/modern-wiremock-best-practices",
+  "repository": "https://github.com/HalcyonTech-LTDA/modern-wiremock-best-practices",
+  "license": "MIT",
+  "skills": [
+    "./claude/skills/"
+  ]
+}
