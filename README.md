@@ -39,7 +39,7 @@ This plugin establishes modern, production-grade engineering standards for WireM
 
 ## What's Included
 
-### 1. Automatic Guardrails (`rules/AGENTS.md`)
+### 1. Automatic Guardrails (`rules/modern-wiremock-engineering.md`)
 Automatically enforced across all projects utilizing WireMock:
 - **Strict Separation of Routing and Payloads**: Absolute ban on large inlined JSON/XML strings in `mappings/`; mandatory delegation to `__files/` via `bodyFileName`.
 - **Mandatory Dedicated `README.md`**: Any project with WireMock stubs MUST maintain a dedicated, synchronized `README.md` documenting the simulated contract, scenario matrix, run commands, and `curl` tests.
@@ -79,7 +79,7 @@ modern-wiremock-best-practices/
 ├── plugin.json
 ├── README.md
 ├── rules/
-│   └── AGENTS.md
+│   └── modern-wiremock-engineering.md
 └── skills/
     ├── modern-wiremock-declarative-stubs/
     │   ├── SKILL.md
