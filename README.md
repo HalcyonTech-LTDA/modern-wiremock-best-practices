@@ -1,37 +1,39 @@
-# Modern WireMock Best Practices Plugin
+<div align="center">
 
-An Antigravity plugin providing automated engineering guardrails, architectural patterns, declarative stub standards, and procedural skills for modern **WireMock** engineering (WireMock 3.x+): strict payload separation (`mappings/` vs `__files/`), dynamic Handlebars templating, stateful scenarios, fault injection, container orchestration, and the **mandatory living `README.md` documentation discipline**.
+# Modern Wiremock Best Practices Plugin
+### Deterministic Service Virtualization, API Mocking & Fault Injection
+
+[![Antigravity Plugin](https://img.shields.io/badge/Antigravity-Plugin%20v1.0.0-4F46E5.svg)](https://antigravity.google)
+[![License: MIT](https://img.shields.io/badge/License-MIT-10B981.svg)](./LICENSE)
+[![Organization](https://img.shields.io/badge/Organization-HalcyonTech--LTDA-black.svg)](https://github.com/HalcyonTech-LTDA)
+
+<p align="center">
+  <b>Professional modern WireMock best practices covering declarative stubs architecture (mappings/ and __files/), response payload separation, Handlebars dynamic templating, stateful scenarios, fault injection, container orchestration, and mandatory living README.md documentation discipline.</b>
+</p>
+
+</div>
 
 ---
 
-## Installation
+## Installation & Verification
 
-### Antigravity
+### Antigravity CLI (`agy`)
 
-Install directly in Antigravity via the CLI:
+Install directly into your Antigravity environment via the CLI:
 
 ```bash
 agy plugin install https://github.com/HalcyonTech-LTDA/modern-wiremock-best-practices
 ```
 
-Verify that the plugin is installed and ready:
+Verify that the plugin is active and adheres to the strict official schema:
 
 ```bash
 agy plugin list
+agy plugin validate --strict ./modern-wiremock-best-practices
 ```
-
-### Claude Code
-
-Add the Halcyon Tech marketplace once, then install the plugin:
-
-```text
-/plugin marketplace add HalcyonTech-LTDA/halcyon-plugins
-/plugin install modern-wiremock-best-practices@halcyon-plugins
-```
-
-Skills are namespaced by plugin in Claude Code (`/modern-wiremock-best-practices:<skill-name>`). The guardrails in `rules/` load through the skills in `claude/skills/`.
 
 ---
+
 ## Overview
 
 In modern distributed microservices and cloud architectures, external dependencies (third-party payment gateways, identity providers, credit bureaus, partner APIs) present significant testing hurdles: network flakiness, rate limits, non-deterministic sandbox data, and financial costs.
@@ -50,71 +52,57 @@ This plugin establishes modern, production-grade engineering standards for WireM
 
 ---
 
-## What's Included
+---
 
-### 1. Automatic Guardrails (`rules/modern-wiremock-engineering.md`)
-Automatically enforced across all projects utilizing WireMock:
-- **Strict Separation of Routing and Payloads**: Absolute ban on large inlined JSON/XML strings in `mappings/`; mandatory delegation to `__files/` via `bodyFileName`.
-- **Mandatory Dedicated `README.md`**: Any project with WireMock stubs MUST maintain a dedicated, synchronized `README.md` documenting the simulated contract, scenario matrix, run commands, and `curl` tests.
-- **Deterministic Priority Choreography**: Explicit priorities (`priority: 1` to `10`) ensuring specific cases take precedence over generic/templated fallbacks.
-- **Handlebars Templating over Fixture Duplication**: Using `response-template` helpers (`{{request.pathSegments.[n]}}`, `{{jsonPath ...}}`) to model dynamic APIs without duplicating stubs.
-- **Zero Sensitive Data or Production PII**: Enforcing synthetic data and random generators; banning real credentials and customer PII in fixtures.
-- **Operational Healthchecks & Choreography**: Requiring native container healthchecks against `/__admin/health` and Compose `condition: service_healthy`.
-- **Symmetrical & Modular Subdirectory Layout**: Organizing complex multi-service mocks into clean, symmetrical subdirectories across `mappings/` and `__files/`.
-- **Stateful Scenario Isolation & Resets**: Strict modeling of Finite State Machines (`scenarioName`, `requiredScenarioState`, `newScenarioState`) with loopback or reset safety.
+## What's Included (Component Catalog)
+
+### Contextual Rules (`rules/`)
+Automatically loaded to govern and protect project contexts:
+- **[`modern-wiremock-engineering.md`](rules/modern-wiremock-engineering.md)**: >-
+
+### Procedural Skills (`skills/`)
+On-demand actionable workflows and runbooks:
+- **[`/modern-wiremock-declarative-stubs`](skills/modern-wiremock-declarative-stubs/SKILL.md)**: Use this skill when authoring, reviewing, or refactoring WireMock declarative stubs (mappings/) and external response payloads (__files/): request matching criteria, bodyFileName decoupling, Handlebars response templating, priority choreography, stateful scenarios, and fault injection.
+- **[`/modern-wiremock-living-documentation`](skills/modern-wiremock-living-documentation/SKILL.md)**: Use this skill when authoring, updating, or reviewing documentation for WireMock mock servers: establishing the mandatory dedicated README.md living documentation, building contract scenario matrices, providing copy-pasteable curl verification recipes, and enforcing documentation synchronization in pull requests.
+- **[`/modern-wiremock-orchestration-and-testing`](skills/modern-wiremock-orchestration-and-testing/SKILL.md)**: Use this skill when deploying, orchestrating, or testing WireMock in Docker, Docker Compose, CI/CD pipelines, and automated test suites: standalone container hardening, healthcheck choreography (/__admin/health), Testcontainers integration, high-load performance tuning, and zero-PII security hygiene.
 
 ---
 
-### 2. Specialized Skills (`skills/`)
-
-#### 🏛️ `modern-wiremock-declarative-stubs`
-Guides declarative stub authoring, JSON matching rules, Handlebars templating, and fault simulation:
-- `references/mappings_and_request_matching.md`: Schema anatomy of `mappings/*.json`, URL matching (`url`, `urlPattern`, `urlPath`, `urlPathPattern`), header/cookie matching, advanced body matching (`equalToJson`, `matchesJsonPath`, `matchesXPath`), priority hierarchies, and catch-all fallbacks.
-- `references/files_and_handlebars_templating.md`: Decoupling payloads into `__files/`, referencing via `bodyFileName`, Handlebars response templating helpers (`request.pathSegments`, `request.query`, `jsonPath`, `randomValue`, `now`, `math`), escaping rules (`{{{...}}}` vs `{{...}}`), and anti-patterns.
-- `references/scenarios_and_fault_injection.md`: State machine modeling (FSM) for polling, retries, and CRUD lifecycles (`Started` -> state transitions), chaos engineering with delays (`fixedDelayMilliseconds`, `randomDelay`, `chunkedDribbleDelay`), and network-level faults (`EMPTY_RESPONSE`, `MALFORMED_RESPONSE_CHUNK`, `RANDOM_DATA_THEN_CLOSE`).
-
-#### 📖 `modern-wiremock-living-documentation`
-Guides the mandatory living documentation standard for WireMock mock servers:
-- `references/mock_readme_standard_template.md`: A complete, professional, domain-agnostic template for a dedicated `wiremock/README.md`.
-- `references/scenario_matrix_and_curl_recipes.md`: Standards for building contract catalog matrices (Scenario | Method & Path | Match Criteria | Status | Payload File), crafting copy-pasteable `curl` verification snippets with expected output comments, and PR synchronization checklists.
-
-#### 🐳 `modern-wiremock-orchestration-and-testing`
-Guides containerization, CI/CD pipelines, Testcontainers, and performance optimization:
-- `references/docker_compose_and_container_hardening.md`: Building standalone immutable WireMock Dockerfiles (`wiremock/wiremock:3.x`), non-root user execution, Docker Compose service choreography, healthcheck integration (`/__admin/health`), and custom extension JAR handling.
-- `references/testcontainers_and_ci_performance.md`: WireMock Testcontainers integration in Java, Python, Node, and Go, disabling request journaling (`--no-request-journal`) for performance testing, and CI/CD fixture caching.
-
----
-
-## Directory Layout
+## Directory Hierarchy
 
 ```text
 modern-wiremock-best-practices/
-├── plugin.json
-├── README.md
-├── rules/
+├── plugin.json              # Official Antigravity manifest (schema v1)
+├── LICENSE                  # MIT License (Copyright 2026 HalcyonTech LTDA)
+├── .gitignore               # System ignores & installed_version.json exclusions
+├── .gitattributes           # Deterministic line endings (* text=auto eol=lf)
+├── README.md                # Golden Standard documentation & runbook
+├── assets/
+│   └── logo.svg             # Official Halcyon Tech corporate vector symbol
+├── rules/                   # Contextual rules discovered automatically
 │   └── modern-wiremock-engineering.md
-└── skills/
-    ├── modern-wiremock-declarative-stubs/
-    │   ├── SKILL.md
-    │   └── references/
-    │       ├── files_and_handlebars_templating.md
-    │       ├── mappings_and_request_matching.md
-    │       └── scenarios_and_fault_injection.md
-    ├── modern-wiremock-living-documentation/
-    │   ├── SKILL.md
-    │   └── references/
-    │       ├── mock_readme_standard_template.md
-    │       └── scenario_matrix_and_curl_recipes.md
-    └── modern-wiremock-orchestration-and-testing/
-        ├── SKILL.md
-        └── references/
-            ├── docker_compose_and_container_hardening.md
-            └── testcontainers_and_ci_performance.md
+├── skills/                  # Actionable procedural skills (Progressive Disclosure)
+│   └── modern-wiremock-declarative-stubs/
+│       └── SKILL.md
+│   └── modern-wiremock-living-documentation/
+│       └── SKILL.md
+│   └── modern-wiremock-orchestration-and-testing/
+│       └── SKILL.md
 ```
 
 ---
 
-## License
+## 💡 Prompt Recipes & Use Cases
 
-This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
-Copyright (c) 2026 Halcyon Tech.
+```markdown
+- "Create deterministic WireMock stubs and dynamic response transformers"
+- "Configure WireMock standalone or Testcontainers integration for consumer tests"
+- "Simulate network faults, rate limits, and slow responses with WireMock"
+```
+
+---
+
+## 📄 License & Corporate Governance
+
+Distributed under the **MIT License**. Copyright (c) 2026 **HalcyonTech LTDA**.  
+Engineered with precision and excellence by [Halcyon Tech](https://github.com/HalcyonTech-LTDA).
